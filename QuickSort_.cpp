@@ -1,56 +1,66 @@
 #include<iostream>
 using namespace std;
 
-int partition(int arr[], int s , int e)
-{
+
+int partition( int arr[], int s, int e) {
+
     int pivot = arr[s];
-    int count = 0;
 
-    for(int i = s+1;i<=e;i++)
-   {
-       if(arr[i] < pivot)
-       {
-           count++;
-       }
-   }
-   
-   // Place Pivot Element at right position
-   int pivotIndex = s + count;
-   swap(arr[pivotIndex],arr[s]);
+    int cnt = 0;
+    for(int i = s+1; i<=e; i++) {
+        if(arr[i] <=pivot) {
+            cnt++;
+        }
+    }
 
-   // Left aur right wala part smbhal lete h
-   int i = s,j = e;
-   while(i < pivotIndex && j > pivotIndex)
-   {
-       while(arr[i] < pivotIndex) {i++;}
-       while(arr[j] > pivotIndex) {j--;}
+    //place pivot at right position
+    int pivotIndex = s + cnt;
+    swap(arr[pivotIndex], arr[s]);
 
-   if(i < pivotIndex && j > pivotIndex)
-       {
-       swap(arr[i++],arr[j--] );
-       }
-    }   
-   return pivotIndex;
+    //left and right wala part smbhal lete h 
+    int i = s, j = e;
+
+    while(i < pivotIndex && j > pivotIndex) {
+
+        while(arr[i] <= pivot) 
+        {
+            i++;
+        }
+
+        while(arr[j] > pivot) {
+            j--;
+        }
+
+        if(i < pivotIndex && j > pivotIndex) {
+            swap(arr[i++], arr[j--]);
+        }
+
+    }
+
+    return pivotIndex;
+
 }
 
-void quickSort(int arr[], int s, int e)
-{
-    // Base Case 
-    if(s >= e) return;
+void quickSort(int arr[], int s, int e) {
 
-    // Partioning Karenge
-    int p = partition(arr,s,e);
+    //base case
+    if(s >= e) 
+        return ;
 
-    //  left wala part sort karo
-    quickSort(arr,s,p-1);
+    //partitioon karenfe
+    int p = partition(arr, s, e);
 
-    // right wala part sort karo
-    quickSort(arr,p+1,e);
+    //left part sort karo
+    quickSort(arr, s, p-1);
+
+    //right wala part sort karo
+    quickSort(arr, p+1, e);
+
 }
 
 int main() {
 
-    int arr[10] = {2,4,1,86,9 ,9,9,10,11,18};
+    int arr[10] = {2,4,1,6,9 ,9,9,9,9,9};
     int n = 10;
 
     quickSort(arr, 0, n-1);
@@ -60,5 +70,8 @@ int main() {
         cout << arr[i] << " ";
     } cout << endl;
 
+
     return 0;
 }
+© 2022 GitHub, Inc.
+Terms
